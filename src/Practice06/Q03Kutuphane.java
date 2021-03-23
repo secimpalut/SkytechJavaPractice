@@ -28,12 +28,18 @@ public class Q03Kutuphane {
 
     public static void menu() {
         Scanner scan = new Scanner(System.in);
+        System.out.println("===================");
         System.out.println("1 - Kitap eklemek\n2 - Listeleme\n3 - Kitap Silme\n4 - Bilgiye gore Kitap arama\n5 - Id ile Kitap Arama");
+        System.out.println("Seceneginizi seciniz");
         byte secenek = scan.nextByte();
+        System.out.println("===================");
+
 
         switch (secenek) {
             case 1: ekle(); break;
             case 2: Listele(); break;
+            case 3: silme(); break;
+            case 4: bulByInfo(); break;
             case 5: bulBy_Id(); break;
         }
     }
@@ -51,6 +57,54 @@ public class Q03Kutuphane {
         } else if(kitaplar.containsKey(istenenId)){
             bulunanKitap = kitaplar.get(istenenId);
             System.out.println("Aradıgınız kitap : " + bulunanKitap);
+        } else {
+            System.out.println("Bu id bilgisine sahip kitap bulunmamaktadır");
+        }
+
+        menu();
+    }
+
+    public static void bulByInfo() {
+        String aranan_info,kitapInfo;
+
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Kitap bilgisini gir: ");
+        aranan_info = scan.next();
+
+        if(kitaplar.isEmpty()) {
+            System.out.println("Hic kitap bulunmamaktadır");
+        } else {
+
+            for(int d=1000; d<=id; d++) {
+                if(kitaplar.containsKey(d)) {
+                    kitapInfo = kitaplar.get(d);
+                    if(kitapInfo.contains(aranan_info)) {
+                        System.out.println(kitapInfo);
+                    }
+                }
+
+            }
+
+        }
+
+        menu();
+
+    }
+
+
+    public static void silme() {
+        int silinen;
+        String silinenKitap;
+
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Silinmesini istedigin id yi gir: ");
+        silinen = scan.nextInt();
+
+        if(kitaplar.isEmpty()) {
+            System.out.println("Hic kitap yok");
+        } else if(kitaplar.containsKey(silinen)) {
+            silinenKitap = kitaplar.remove(silinen);
+            System.out.println(silinenKitap + " basarıyla silinmistir");
         } else {
             System.out.println("Bu id bilgisine sahip kitap bulunmamaktadır");
         }
