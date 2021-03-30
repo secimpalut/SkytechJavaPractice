@@ -48,13 +48,37 @@ public class Q03_Manav {
 
         System.out.println("Aldıgınız urunlerin toplam fiyati = " + toplamfiyat);
 
+        System.out.println("Paranızın ustu: " + pay());
+        System.out.println("Alısveris icin bizi tercih ettginiz icin tesekkurler...");
+
 
     }
 
     public static void fiyataekle(int index,int kilo) {
-             toplamfiyat = fiyatlar.get(index) * kilo;
+
+        toplamfiyat = fiyatlar.get(index) * kilo;
     }
 
+    public static double pay() {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Kasaya verilen ucret:");
+        double verilen_para = scan.nextDouble();
+        double para_ustu = 0;
+
+        do {
+            if (verilen_para < toplamfiyat) {
+                System.out.println("Verdiğiniz ücret yetersizdir.");
+                System.out.print("yeni verilen ucret:");
+                verilen_para = scan.nextDouble();
+            } else {
+                para_ustu = verilen_para - toplamfiyat;
+                break;
+            }
+
+        }while(true);
+
+        return para_ustu;
+    }
 
 
 
